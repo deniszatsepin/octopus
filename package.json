@@ -1,16 +1,31 @@
 {
   "name": "octopus",
   "version": "0.0.0",
-  "description": "Online next generation dating service.",
+  "description": "Online next generation dating service back-end.",
   "private": "true",
   "main": "index.js",
   "scripts": {
-    "test": "testall"
+    "test": "testall",
+    "start": "NODE_ENV=development NODE_PATH=./modules ./node_modules/.bin/nodemon index.js"
   },
   "repository": {
     "type": "git",
     "url": "bitbucket"
   },
-  "author": "denis@zatsepin.sbp.ru",
-  "license": "BSD"
+  "author": {
+    "name": "Yummyweb",
+    "email": "dev-octopus@yummyweb.ru"
+  },
+  "license": "BSD",
+  "dependencies": {
+    "express":          "latest",
+    "passport":         "latest",
+    "passport-local":   "latest",
+    "lodash":           "latest"
+  },
+  "devDependencies": {
+    "nodemon": "latest",
+    "mocha": "latest",
+    "chai": "latest"
+  }
 }
