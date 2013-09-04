@@ -1,0 +1,16 @@
+{
+  "name": "octopus",
+  "version": "0.0.0",
+  "description": "Online next generation dating service.",
+  "private": "true",
+  "main": "index.js",
+  "scripts": {
+    "test": "testall"
+  },
+  "repository": {
+    "type": "git",
+    "url": "bitbucket"
+  },
+  "author": "denis@zatsepin.sbp.ru",
+  "license": "BSD"
+}
