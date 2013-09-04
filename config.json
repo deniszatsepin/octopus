@@ -1,4 +1,8 @@
 {
+  "server": {
+    "port": 3000,
+    "secret": "DJLVIA09"
+  },
   "database": {
     "host": "localhost",
     "port": "9142"

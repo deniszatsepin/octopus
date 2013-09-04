@@ -1,7 +1,6 @@
 var _ = require('lodash');
 
 var Configurator = function(config) {
-  console.log('config: ', config);
   this.config = config;
 }
 
@@ -19,6 +18,7 @@ Configurator.prototype.get = function(path) {
   return result;
 }
 
+//TODO: finish this function
 Configurator.prototype.set = function(path, val) {
   var elements = path.split('.');
 

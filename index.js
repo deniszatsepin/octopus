@@ -3,7 +3,6 @@ var config = require('./config')
   
 Configurator.init(config);
 
-var auth = require('oct-auth')
-  , express = require('express');
+var utils = require('oct-utils');
 
-auth.hello();
+utils.systemInit();
