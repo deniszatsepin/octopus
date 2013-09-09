@@ -1,7 +1,10 @@
-var _ = require('lodash');
+var _ = require('lodash')
+  , path = require('path');
 
 var Configurator = function(config) {
   this.config = config;
+  this.root = path.normalize(__dirname + '/../../');
+  this.modPath = root + '/modules';
 }
 
 Configurator.prototype.get = function(path) {

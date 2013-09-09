@@ -8,6 +8,7 @@ module.exports.systemInit = function() {
     , port = config.get('server.port');
 
   //TODO: initialize all modules
+
   
   Server.postInstall();
 
