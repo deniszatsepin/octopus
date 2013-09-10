@@ -1,6 +1,7 @@
 var Server = require('./lib/server')
   , http = require('http')
-  , config = require('oct-config');
+  , config = require('oct-config')
+  ,	modules = require('./lib/modules');
 
 module.exports.systemInit = function() {
 
@@ -8,7 +9,7 @@ module.exports.systemInit = function() {
     , port = config.get('server.port');
 
   //TODO: initialize all modules
-
+  modules.initModules();
   
   Server.postInstall();
 

@@ -8,8 +8,8 @@ var server = require('./server').server;
 
 /**
  * This function gets handlers and base path and assosiate handlers with routes.
- * @param path
- * @param handlers
+ * @param {String} path
+ * @param {Array} handlers
  */
 module.exports = function(path, handlers) {
   for (actionName in handlers) {

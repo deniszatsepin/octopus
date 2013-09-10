@@ -3,9 +3,9 @@ var _ = require('lodash')
 
 var Configurator = function(config) {
   this.config = config;
-  this.root = path.normalize(__dirname + '/../../');
-  this.modPath = root + '/modules';
-}
+  this.root = path.normalize(__dirname + '/../..');
+  this.modPath = path.normalize(this.root + '/modules');
+};
 
 Configurator.prototype.get = function(path) {
   var elements = path.split('.');
@@ -19,13 +19,13 @@ Configurator.prototype.get = function(path) {
     }
   }
   return result;
-}
+};
 
 //TODO: finish this function
 Configurator.prototype.set = function(path, val) {
   var elements = path.split('.');
 
-}
+};
 
 module.exports.init = function(config) {
   return module.exports = new Configurator(config);

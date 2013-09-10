@@ -7,6 +7,7 @@
 var passport = require('passport')
   , server = require('oct-utils/lib/server').server;
 
+console.log("oct-auth initialization...");
 module.exports = function() {
 
   //Initializing passport
