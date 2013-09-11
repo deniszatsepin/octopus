@@ -1,5 +1,4 @@
-var LocalStrategy = require('passport-local').Strategy
-  , rester = require('oct-utils/lib/rester');
+var LocalStrategy = require('passport-local').Strategy;
 
 var authFields = {
   usernameField: 'email',
@@ -20,11 +19,21 @@ module.exports.strategy = new LocalStrategy(authFields, localStrategy);
  * @param next
  */
 var createSession = function (req, res, next) {
-
+	console.log('create session');
+	res.json(200, {
+		error: 0,
+		message: 'session created'
+	});
 };
 
 var destroySession = function (req, res, next) {
-
+	console.log('destroy session');
+	var sessId = req.body.id;
+	
+	res.json(200, {
+		error: 0,
+		message: 'session destroyed'
+	});
 };
 
 module.exports.routes = {

@@ -5,9 +5,11 @@
  */
 
 var passport = require('passport')
-  , server = require('oct-utils/lib/server').server;
+  , server = require('oct-utils/lib/server').server
+  , rester = require('oct-utils/lib/rester');
 
 console.log("oct-auth initialization...");
+
 module.exports = function() {
 
   //Initializing passport
@@ -26,13 +28,19 @@ module.exports = function() {
 
   passport.deserializeUser(function(id, done) {
     //TODO: Find User in database by id and return him with done callback
-    /*
-    User.findOne({
-      _id: id
-    }, function(err, user) {
-      done(err, user);
-    });
-    */
+
+    //dummy finder
+    var User = {
+      id: 123,
+      email: 'denis@zatsepin.spb.ru',
+      password: 456
+    }
+
+    if (id === User.id) {
+      done(null, User);
+    } else {
+      done(null, null);
+    }
   });
 
   loadStrategies();
@@ -41,5 +49,6 @@ module.exports = function() {
 
 var loadStrategies = function () {
   var local = require('./strategies/local');
-  passport.use(local);
+  passport.use(local.strategy);
+  rester('/session', local.routes);
 }

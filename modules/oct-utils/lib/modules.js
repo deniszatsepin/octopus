@@ -95,7 +95,10 @@ module.exports.initModules = function(callback) {
     console.log('Modules: ', modules);
     for (var i = 0, len = modules.length; i < len; i += 1) {
       var module = modules[i];
-      require(module.init);
+      var moduleInit = require(module.init);
+      if (typeof moduleInit === 'function') {
+        moduleInit();
+      }
     }
   });
   

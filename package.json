@@ -18,10 +18,11 @@
   },
   "license": "BSD",
   "dependencies": {
-    "express":          "latest",
-    "passport":         "latest",
-    "passport-local":   "latest",
-    "lodash":           "latest"
+    "express": "latest",
+    "passport": "latest",
+    "passport-local": "latest",
+    "lodash": "latest",
+    "async": "~0.2.9"
   },
   "devDependencies": {
     "nodemon": "latest",
