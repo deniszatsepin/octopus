@@ -18,4 +18,4 @@ module.exports.systemInit = function() {
     console.log('Octopus listening on port ' + port);
   });
 
-}
+};

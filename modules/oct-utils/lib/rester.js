@@ -12,7 +12,8 @@ var server = require('./server').server;
  * @param {Array} handlers
  */
 module.exports = function(path, handlers) {
-  for (actionName in handlers) {
+
+  for (var actionName in handlers) {
     var handler = handlers[actionName]
       , route = '';
 
@@ -47,4 +48,4 @@ module.exports = function(path, handlers) {
         server.get(route, handler);
     }
   }
-}
+};

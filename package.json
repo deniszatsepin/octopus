@@ -26,7 +26,10 @@
   },
   "devDependencies": {
     "nodemon": "latest",
-    "mocha": "latest",
-    "chai": "latest"
+    "mocha": "~1.12.1",
+    "chai": "~1.7.2",
+    "grunt-mocha-test": "~0.6.3",
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.4"
   }
 }

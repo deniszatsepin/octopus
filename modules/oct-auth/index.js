@@ -5,4 +5,4 @@ var _ = require('lodash')
 module.exports.hello = function() {
   console.log( _.range(10) );
   console.log( "database port: ", config.get("database.port") );
-}
+};

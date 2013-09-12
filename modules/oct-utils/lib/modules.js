@@ -55,7 +55,7 @@ var getSortedModules = function(root, exclude, callback) {
                     modules.push({
                       name: module,
                       init: modulePath + '/lib/init',
-                      priority: parseInt(priority) || 1000
+                      priority: parseInt(priority, 10) || 1000
                     });     
                   }
                   cb();
@@ -81,12 +81,12 @@ var getSortedModules = function(root, exclude, callback) {
 
               cb(null, modules);
             }
-          })
+          });
 
         }
       });   
     }
-  })
+  });
 };
 
 module.exports.initModules = function(callback) {

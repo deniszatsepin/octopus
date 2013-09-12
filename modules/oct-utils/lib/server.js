@@ -13,7 +13,7 @@ module.exports.setup = function() {
 
   module.exports.server = app;
   return app;
-}
+};
 
 module.exports.postInstall = function () {
   
@@ -27,7 +27,7 @@ module.exports.postInstall = function () {
     app.use(express.errorHandler({
       showStack: true,
       dumpExceptions: true
-    }))
+    }));
   });
 
-}
+};

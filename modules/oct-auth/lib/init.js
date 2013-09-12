@@ -34,7 +34,7 @@ module.exports = function() {
       id: 123,
       email: 'denis@zatsepin.spb.ru',
       password: 456
-    }
+    };
 
     if (id === User.id) {
       done(null, User);
@@ -45,10 +45,10 @@ module.exports = function() {
 
   loadStrategies();
 
-}
+};
 
 var loadStrategies = function () {
   var local = require('./strategies/local');
   passport.use(local.strategy);
   rester('/session', local.routes);
-}
+};

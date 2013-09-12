@@ -28,5 +28,6 @@ Configurator.prototype.set = function(path, val) {
 };
 
 module.exports.init = function(config) {
-  return module.exports = new Configurator(config);
+  var configurator = module.exports = new Configurator(config);
+  return configurator;
 };
