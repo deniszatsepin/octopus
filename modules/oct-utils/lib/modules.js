@@ -89,47 +89,19 @@ var getSortedModules = function(root, exclude, callback) {
   });
 };
 
+var initModules = function (err, modules) {
+  console.log('Modules: ', modules);
+  for (var i = 0, len = modules.length; i < len; i += 1) {
+    var module = modules[i];
+    var moduleInit = require(module.init);
+    if (typeof moduleInit === 'function') {
+      moduleInit();
+    }
+  }
+};
+
 module.exports.initModules = function(callback) {
   var root = config.modPath;
-  getSortedModules(root, function(err, modules) {
-    console.log('Modules: ', modules);
-    for (var i = 0, len = modules.length; i < len; i += 1) {
-      var module = modules[i];
-      var moduleInit = require(module.init);
-      if (typeof moduleInit === 'function') {
-        moduleInit();
-      }
-    }
-  });
+  getSortedModules(root, initModules);
   
-  /*
-  var moduleDirs = fs.readdirSync(root);
-  var modules = [];
-
-  moduleDirs.forEach(function(module) {
-    console.log('init module: ', module);
-    if (module === 'oct-utils') return 0;
-
-    var modulePath = root + '/' + module;
-    var packagePath = path.normalize(modulePath + '/package.json');
-    console.log(packagePath);
-    if(fs.existsSync(packagePath)) {
-      console.log('e');
-      var priority = require(modulePath + '/package').priority;
-
-      modules.push({
-        name: module,
-        init: modulePath + '/init',
-        priority: parseInt(priority) || 1000
-      });     
-    }
-  });
-
-  modules.sort( function(a, b) {
-    var ap = a.priority;
-    var bp = b.priority;
-    return ap === bp ? 0 : ap > bp ? 1 : -1; 
-  });
-  console.log('Modules: ', modules);
-  */
 };

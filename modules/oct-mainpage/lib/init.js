@@ -12,6 +12,6 @@ var index = function (req, res, next) {
 
 var handlers = {
 	index: index
-}
+};
 
 rester('/', handlers);

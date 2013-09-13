@@ -8,9 +8,11 @@
     	"secure": false
     }
   },
-  "database": {
+  "mongo": {
     "host": "localhost",
-    "port": "9142"
+    "port": "",
+    "db": "octopus",
+    "fixtures": "/fixtures/mongo"
   },
   "redis": {
   	"host": "localhost",

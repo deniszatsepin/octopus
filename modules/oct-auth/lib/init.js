@@ -12,7 +12,8 @@ var passport = require('passport')
 console.log("oct-auth initialization...");
 
 module.exports = function() {
-
+  require('./model');
+ 
   //Initializing passport
   server.use(passport.initialize());
   server.use(passport.session());
