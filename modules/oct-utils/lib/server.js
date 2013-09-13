@@ -1,15 +1,27 @@
 var express = require('express')
   , config = require('oct-config')
+  , redis = require('./redis')
+  , RedisStore = require('connect-redis')(express)
   , app = null;
 
 module.exports.setup = function() {
   app = express();
+
+  var sessionOptions = {
+    secret: config.get('server.secret'),
+    key: config.get('server.session.key'),
+    cookie: {
+      maxAge: config.get('server.session.maxAge') * 3600000,
+      secure: config.get('server.session.secure')
+    },
+    store: new RedisStore({client: redis.client})
+  };
   
+  app.use(express.favicon());
   app.use(express.bodyParser());
   app.use(express.cookieParser());
-  app.use(express.session({
-    secret: config.get('server.secret')
-  }));
+  app.use(express.session(sessionOptions));
+  console.log('setup');
 
   module.exports.server = app;
   return app;

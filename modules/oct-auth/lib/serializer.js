@@ -1,4 +1,12 @@
 
+/**
+ * Gets User object and returns User.id
+ * @param {Object} user User object
+ * @param {Function} done Callback function
+ * @param {Error} done.error   Not null, if there was some sort of an error
+ * @param {Number} done.userId   If User parameter is not null, then the function returns User.id.
+ */
+
 exports.serialize = function(user, done) {
 	console.log("Passport user: ", user);
 	console.log("Passport done: ", done);

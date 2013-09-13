@@ -15,7 +15,10 @@ Configurator.prototype.get = function(path) {
       result = result[elements[i]];
     } else {
       result = null;
-      throw new Exception( 'Configurator: wrong path (' + path + ')' );
+      var desc = 'Configurator: wrong path (' + path + ')';
+      var err = new Error(desc);
+      console.log(err);
+      throw err;
     }
   }
   return result;
