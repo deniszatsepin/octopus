@@ -7,7 +7,8 @@
 var passport = require('passport')
   , server = require('oct-utils/lib/server').server
   , rester = require('oct-utils/lib/rester')
-  , serializer = require('./serializer');
+  , serializer = require('./serializer')
+  , rest = require('./rest');
 
 console.log("oct-auth initialization...");
 
@@ -29,5 +30,5 @@ module.exports = function() {
 var loadStrategies = function () {
   var local = require('./strategies/local');
   passport.use(local.strategy);
-  rester('/session', local.routes);
+  rester('/session', rest.handlers);
 };
