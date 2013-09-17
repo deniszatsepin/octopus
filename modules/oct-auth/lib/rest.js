@@ -5,6 +5,7 @@ var createSession = function(req, res, next) {
 		console.log('Err: ', err);
 		console.log('User: ', user);
 		console.log('Info: ', info);
+		console.log('Req: ', req);
 		if (err) {
 			next(err);
 		}

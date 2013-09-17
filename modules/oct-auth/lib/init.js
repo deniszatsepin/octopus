@@ -15,20 +15,20 @@ console.log("oct-auth initialization...");
 module.exports = function() {
   require('./model');
  
-  //Initializing passport
-  server.use(passport.initialize());
-  server.use(passport.session());
-
   passport.serializeUser(serializer.serialize);
 
   passport.deserializeUser(serializer.deserialize);
 
   loadStrategies();
 
+  //Initializing passport
+  server.use(passport.initialize());
+  server.use(passport.session());
+
+  rester('/session', rest.handlers);
 };
 
 var loadStrategies = function () {
   var local = require('./strategies/local');
   passport.use(local.strategy);
-  rester('/session', rest.handlers);
 };
