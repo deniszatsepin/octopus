@@ -13,13 +13,15 @@ module.exports.systemInit = function() {
     , port = config.get('server.port');
 
   //TODO: initialize all modules
-  modules.initModules();
-  
-  Server.postInstall();
+  modules.initModules(function (err) {
+    Server.postInstall();
 
 
-  http.createServer(server).listen(port, function() {
-    console.log('Octopus listening on port ' + port);
+    http.createServer(server).listen(port, function() {
+      console.log('Octopus listening on port ' + port);
+    });
   });
+  
+  
 
 };

@@ -17,11 +17,12 @@ module.exports.setup = function() {
     store: new RedisStore({client: redis.client})
   };
   
-  app.use(express.favicon());
-  app.use(express.bodyParser());
-  app.use(express.cookieParser());
-  app.use(express.session(sessionOptions));
-  console.log('setup');
+  app.configure(function(){
+    app.use(express.favicon());
+    app.use(express.bodyParser());
+    app.use(express.cookieParser());
+    app.use(express.session(sessionOptions));
+  });
 
   module.exports.server = app;
   return app;

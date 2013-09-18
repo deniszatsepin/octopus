@@ -89,7 +89,7 @@ var getSortedModules = function(root, exclude, callback) {
   });
 };
 
-var initModules = function (err, modules) {
+var initModules = function (modules, callback) {
   console.log('Modules: ', modules);
   for (var i = 0, len = modules.length; i < len; i += 1) {
     var module = modules[i];
@@ -98,10 +98,17 @@ var initModules = function (err, modules) {
       moduleInit();
     }
   }
+  callback();
 };
 
 module.exports.initModules = function(callback) {
   var root = config.modPath;
-  getSortedModules(root, initModules);
+  getSortedModules(root, function(err, modules) {
+    if(err) {
+      callback(err);
+    } else {
+      initModules(modules, callback);
+    }
+  });
   
 };

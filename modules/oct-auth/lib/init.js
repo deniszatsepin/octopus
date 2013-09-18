@@ -13,6 +13,12 @@ var passport = require('passport')
 console.log("oct-auth initialization...");
 
 module.exports = function() {
+  //Initializing passport
+  server.configure(function(){
+    server.use(passport.initialize());
+    server.use(passport.session());
+  });
+  
   require('./model');
  
   passport.serializeUser(serializer.serialize);
@@ -21,9 +27,6 @@ module.exports = function() {
 
   loadStrategies();
 
-  //Initializing passport
-  server.use(passport.initialize());
-  server.use(passport.session());
 
   rester('/session', rest.handlers);
 };
