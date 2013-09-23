@@ -17,5 +17,8 @@
   "redis": {
   	"host": "localhost",
   	"port":	6379
+  },
+  "photo": {
+    "path": "/home/fetch/work/octos/files"
   }
 }

@@ -1,6 +1,14 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
+    env: {
+      options: {
+        NODE_PATH: '/home/fetch/work/octos/octopus/modules'
+      },
+      dev: {
+        NODE_ENV: 'development',
+      }
+    },
     jshint: {
       options: {
         curly: true,
@@ -28,11 +36,12 @@ module.exports = function(grunt) {
   });
 
   // Add the tasks here.
+  grunt.loadNpmTasks('grunt-env');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-mocha-test');
 
   grunt.registerTask('hint', 'jshint');
-  grunt.registerTask('test', 'mochaTest');
+  grunt.registerTask('test', ['env', 'mochaTest']);
 
   grunt.registerTask('default', ['hint', 'test']);
 };
