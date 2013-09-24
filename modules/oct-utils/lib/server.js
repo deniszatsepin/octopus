@@ -19,7 +19,7 @@ module.exports.setup = function() {
   
   app.configure(function(){
     app.use(express.favicon());
-    app.use(express.bodyParser());
+    app.use(express.bodyParser({ uploadDir: config.root + '/uploads' }));
     app.use(express.methodOverride());
     app.use(express.cookieParser());
     app.use(express.session(sessionOptions));
