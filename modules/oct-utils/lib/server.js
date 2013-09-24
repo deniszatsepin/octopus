@@ -20,6 +20,7 @@ module.exports.setup = function() {
   app.configure(function(){
     app.use(express.favicon());
     app.use(express.bodyParser());
+    app.use(express.methodOverride());
     app.use(express.cookieParser());
     app.use(express.session(sessionOptions));
   });
@@ -31,6 +32,8 @@ module.exports.setup = function() {
 module.exports.postInstall = function () {
   
   app.use(app.router);
+
+  app.use(express.static(config.root + '/public'));
   
   app.use( function(req, res, next) {
     res.send(404, "Sorry, but page with url " + req.url + " doesn't exist.");

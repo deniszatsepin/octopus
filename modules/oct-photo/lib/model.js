@@ -43,7 +43,7 @@ var AlbumSchema = new Schema({
 }); 
 AlbumSchema.index(
 {
-	owner: 1, name: 1 	
+  owner: 1, name: 1
 }, 
 {
 	unique: true

@@ -14,4 +14,4 @@ var handlers = {
 	index: index
 };
 
-rester('/', handlers);
+rester('/hello', handlers);

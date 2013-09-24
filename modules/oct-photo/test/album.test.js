@@ -16,14 +16,14 @@ var testAlbum2 = {
 	owner: albumOwnerId,
 	name: 'TestAlbum2',
 	description: 'Test2 album description'
-}
+};
 
 describe('Album', function(){
 	describe('AlbumManager', function(done){
 
 		before(function(){
 			mongooseInit.init();
-			mongoose.connection.collections['albums'].drop(done);
+			mongoose.connection.collections.albums.drop(done);
 		});
 
 		it('should create an album1', function(done) {
