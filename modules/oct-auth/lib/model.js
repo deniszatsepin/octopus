@@ -9,21 +9,24 @@ var UserSchema = new Schema({
   _id: Number,
   email: {
     type: String,
-    "default": ''
+    required: true
   },
   hashed_password: {
     type: String,
-    "default": ''
+    required: true
   },
   salt: {
     type: String,
-    "default": ''
+    required: true
   },
   role: {
     type: String,
     "default": ''
   },
-  profile: {type: Number, ref: 'Profile'}
+  profile: {
+		type: Schema.Types.ObjectId,
+		ref: 'Profile'
+  }
 });
 
 UserSchema.virtual('password')
@@ -45,7 +48,7 @@ UserSchema.path('email').validate(
     var User;
     User = mongoose.model('User');
     if (this.isNew || this.isModified('email')) {
-      return User.find({
+      User.find({
         email: email
       }).exec(function(err, users) {
         fn(err || users.length === 0);
