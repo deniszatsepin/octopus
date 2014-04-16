@@ -6,7 +6,7 @@ module.exports = function(grunt) {
         NODE_PATH: '/home/fetch/work/octos/octopus/modules'
       },
       dev: {
-        NODE_ENV: 'development',
+        NODE_ENV: 'development'
       }
     },
     jshint: {
@@ -19,7 +19,7 @@ module.exports = function(grunt) {
         devel: true,
         globals: {
           jQuery: true
-        },
+        }
       },
 
       all: ['Gruntfile.js', 'index.js', 'modules/**/*.js']

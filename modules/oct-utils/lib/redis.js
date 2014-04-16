@@ -8,12 +8,10 @@ var redis = require('redis');
 var config = require('oct-config');
 
 
-
-var init = exports.init = function () {
+exports.init = function () {
 	var port = config.get('redis.port');
 	var host = config.get('redis.host');
 	console.log('redis cfg: ', host, ':', port);
-
 
 	var client = redis.createClient(port, host);
 	

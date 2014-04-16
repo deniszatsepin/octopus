@@ -1,17 +1,17 @@
-var _ = require('lodash')
-  , path = require('path');
+var _ = require('lodash');
+var path = require('path');
 
 var Configurator = function(config) {
-  this.config = config;
-  this.root = path.normalize(__dirname + '/../..');
-  this.modPath = path.normalize(this.root + '/modules');
+  this.config =     config;
+  this.root =       path.normalize(__dirname + '/../..');
+  this.modPath =    path.normalize(this.root + '/modules');
 };
 
 Configurator.prototype.get = function(path) {
   var elements = path.split('.');
   var result = this.config;
   for (var i = 0, len = elements.length; i < len; i += 1) {
-    if (typeof result[elements[i]] !== 'undefined') {
+    if (result[elements[i]] !== undefined) {
       result = result[elements[i]];
     } else {
       result = null;
@@ -24,10 +24,13 @@ Configurator.prototype.get = function(path) {
   return result;
 };
 
-//TODO: finish this function
 Configurator.prototype.set = function(path, val) {
   var elements = path.split('.');
-
+	var key = elements.slice(0, -1).join('.');
+	var element = this.get(key);
+	if (element) {
+		element[elements[elements.length - 1]] = val;
+	}
 };
 
 module.exports.init = function(config) {

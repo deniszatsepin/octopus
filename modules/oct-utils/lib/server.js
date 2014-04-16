@@ -1,8 +1,15 @@
-var express = require('express')
-  , config = require('oct-config')
-  , redis = require('./redis')
-  , RedisStore = require('connect-redis')(express)
-  , app = null;
+var express = require('express');
+var favicon = require('static-favicon');
+var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
+var Cookies = require('cookies');
+var session = require('express-session');
+var serveStatic = require('serve-static');
+var errorHandler = require('errorhandler');
+var config = require('oct-config');
+var redis = require('./redis');
+var RedisStore = require('connect-redis')(express);
+var app = null;
 
 module.exports.setup = function() {
   app = express();
@@ -18,11 +25,11 @@ module.exports.setup = function() {
   };
   
   app.configure(function(){
-    app.use(express.favicon());
-    app.use(express.bodyParser({ uploadDir: config.root + '/uploads' }));
-    app.use(express.methodOverride());
-    app.use(express.cookieParser());
-    app.use(express.session(sessionOptions));
+    app.use(favicon(config.root + '/public/favicon.ico'));
+    app.use(bodyParser({ uploadDir: config.root + '/uploads' }));
+    app.use(methodOverride());
+    app.use(Cookies.express(config.get('server.session.key')));
+    app.use(session(sessionOptions));
   });
 
   module.exports.server = app;
@@ -33,17 +40,18 @@ module.exports.postInstall = function () {
   
   app.use(app.router);
 
-  app.use(express.static(config.root + '/public'));
+  app.use(serveStatic(config.root + '/public'));
   
   app.use( function(req, res, next) {
     res.send(404, "Sorry, but page with url " + req.url + " doesn't exist.");
   });
 
-  app.configure('development', function () {
-    app.use(express.errorHandler({
+	var env = process.env.NODE_ENV || 'development';
+  if ('development' == env) {
+    app.use(errorHandler({
       showStack: true,
       dumpExceptions: true
     }));
-  });
+  };
 
 };

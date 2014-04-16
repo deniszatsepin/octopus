@@ -27,8 +27,8 @@ module.exports = function() {
 
   loadStrategies();
 
-
-  rester('/session', rest.handlers);
+	var router = rester(rest.handlers);
+  server.use('/session', router);
 };
 
 var loadStrategies = function () {

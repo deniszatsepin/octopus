@@ -5,47 +5,50 @@
  */
 
 var server = require('./server').server;
+var express = require('express');
 
 /**
  * This function gets handlers and base path and assosiate handlers with routes.
  * @param {String} path
  * @param {Array} handlers
  */
-module.exports = function(path, handlers) {
-
+module.exports = function(handlers) {
+	var path = '/';
+	var router = express.Router();
   for (var actionName in handlers) {
     var handler = handlers[actionName]
       , route = '';
 
     switch(actionName) {
       case 'index':
-        server.get(path, handler);
+        router.get(path, handler);
         break;
       case 'new':
-        route = path + '/new';
-        server.get(route, handler);
+        route = path + 'new';
+        router.get(route, handler);
         break;
       case 'create':
-        server.post(path, handler);
+        router.post(path, handler);
         break;
       case 'show':
-        route = path + '/:id';
-        server.get(route, handler);
+        route = path + ':id';
+        router.get(route, handler);
         break;
       case 'edit':
-        route = path + '/:id/edit';
-        server.get(rotue, handler);
+        route = path + ':id/edit';
+        router.get(rotue, handler);
         break;
       case 'update':
-        route = path + '/:id';
-        server.put(route, handler);
+        route = path + ':id';
+        router.put(route, handler);
         break;
       case 'destroy':
-        route = path + '/:id';
-        server.delete(route, handler);
+        route = path + ':id';
+        router.delete(route, handler);
         break;
       default:
-        server.get(route, handler);
+        router.get(route, handler);
     }
   }
+	return router;
 };
