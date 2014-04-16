@@ -24,10 +24,17 @@
     "lodash": "latest",
     "async": "~0.2.9",
     "redis": "~0.8.4",
-    "connect-redis": "~1.4.5",
+    "connect-redis": ">=2.0.0",
     "mongoose": "~3.6.19",
     "pow-mongoose-fixtures": "~0.3.0",
-    "elasticsearchclient": "~0.5.3"
+    "elasticsearchclient": "~0.5.3",
+    "errorhandler": "^1.0.0",
+    "method-override": "^1.0.0",
+    "cookies": "^0.4.0",
+    "express-session": "^1.0.2",
+    "serve-static": "^1.0.4",
+    "body-parser": "^1.0.2",
+    "static-favicon": "^1.0.2"
   },
   "devDependencies": {
     "nodemon": "latest",

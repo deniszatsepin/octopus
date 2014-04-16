@@ -1,3 +1,4 @@
+var server = require('oct-utils/lib/server').server;
 var rester = require('oct-utils/lib/rester');
 
 var index = function (req, res, next) {
@@ -14,4 +15,5 @@ var handlers = {
 	index: index
 };
 
-rester('/hello', handlers);
+var router = rester(handlers);
+server.use('/hello', router);

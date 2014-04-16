@@ -5,33 +5,31 @@
  */
 
 var passport = require('passport')
-  , server = require('oct-utils/lib/server').server
-  , rester = require('oct-utils/lib/rester')
-  , serializer = require('./serializer')
-  , rest = require('./rest');
+	, server = require('oct-utils/lib/server').server
+	, rester = require('oct-utils/lib/rester')
+	, rest = require('./rest');
 
 console.log("oct-auth initialization...");
 
 module.exports = function() {
-  //Initializing passport
-  server.configure(function(){
-    server.use(passport.initialize());
-    server.use(passport.session());
-  });
-  
-  require('./model');
- 
-  passport.serializeUser(serializer.serialize);
+	//Initializing passport
+	server.use(passport.initialize());
+	server.use(passport.session());
 
-  passport.deserializeUser(serializer.deserialize);
+	require('./model');
+	var serializer = require('./serializer');
 
-  loadStrategies();
+	passport.serializeUser(serializer.serialize);
+
+	passport.deserializeUser(serializer.deserialize);
+
+	loadStrategies();
 
 	var router = rester(rest.handlers);
-  server.use('/session', router);
+	server.use('/session', router);
 };
 
 var loadStrategies = function () {
-  var local = require('./strategies/local');
-  passport.use(local.strategy);
+	var local = require('./strategies/local');
+	passport.use(local.strategy);
 };

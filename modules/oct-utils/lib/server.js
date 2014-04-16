@@ -8,7 +8,7 @@ var serveStatic = require('serve-static');
 var errorHandler = require('errorhandler');
 var config = require('oct-config');
 var redis = require('./redis');
-var RedisStore = require('connect-redis')(express);
+var RedisStore = require('connect-redis')(session);
 var app = null;
 
 module.exports.setup = function() {
@@ -24,22 +24,17 @@ module.exports.setup = function() {
     store: new RedisStore({client: redis.client})
   };
   
-  app.configure(function(){
-    app.use(favicon(config.root + '/public/favicon.ico'));
-    app.use(bodyParser({ uploadDir: config.root + '/uploads' }));
-    app.use(methodOverride());
-    app.use(Cookies.express(config.get('server.session.key')));
-    app.use(session(sessionOptions));
-  });
+	app.use(favicon(config.root + '/public/favicon.ico'));
+	app.use(bodyParser({ uploadDir: config.root + '/uploads' }));
+	app.use(methodOverride());
+	app.use(Cookies.express(config.get('server.session.key')));
+	app.use(session(sessionOptions));
 
   module.exports.server = app;
   return app;
 };
 
 module.exports.postInstall = function () {
-  
-  app.use(app.router);
-
   app.use(serveStatic(config.root + '/public'));
   
   app.use( function(req, res, next) {
@@ -53,5 +48,4 @@ module.exports.postInstall = function () {
       dumpExceptions: true
     }));
   };
-
 };
