@@ -42,10 +42,10 @@ module.exports.postInstall = function () {
   });
 
 	var env = process.env.NODE_ENV || 'development';
-  if ('development' == env) {
+  if ('development' === env) {
     app.use(errorHandler({
       showStack: true,
       dumpExceptions: true
     }));
-  };
+  }
 };
