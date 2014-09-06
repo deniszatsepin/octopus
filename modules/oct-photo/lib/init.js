@@ -1,9 +1,12 @@
 var server = require('oct-utils/lib/server').server;
 var rester = require('oct-utils/lib/rester');
 var handlers = require('./rest');
+const mount   = require('koa-mount');
+const config  = require('oct-config');
+const logger  = config.logger;
 
 module.exports = function() {
-	console.log('oct-photo initialization...');
+	logger.info('Module oct-photo initialization...');
 	var router = rester(handlers);
-	server.use('/upload', router);
+	server.use(mount('/upload', router.middleware()));
 };

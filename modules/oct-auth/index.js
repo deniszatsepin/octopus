@@ -1,6 +1,6 @@
-var _ = require('lodash')
-  , passport = require('passport')
-  , config = require('oct-config');
+const _         = require('lodash');
+const passport  = require('passport');
+const config    = require('oct-config');
 
 module.exports.hello = function() {
   console.log( _.range(10) );

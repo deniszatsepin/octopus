@@ -1,9 +1,10 @@
-var _ = require('lodash')
-	, fs = require('fs')
-	, path = require('path')
-	, async = require('async')
-	, config = require('oct-config')
-	, server = require('./server').server;
+const _       = require('lodash');
+const fs      = require('fs');
+const	path    = require('path');
+const	async   = require('async');
+const	config  = require('oct-config');
+const logger  = config.logger;
+const	server  = require('./server').server;
 
 /**
  *  @param {String} path to modules dirs
@@ -34,7 +35,6 @@ var getSortedModules = function(root, exclude, callback) {
 				} else {
 					var modules = [];
 					var getPackage = function(module, cb) {
-						console.log('init module: ', module);
 						if (_.indexOf(excl, module) !== -1) {
 							cb();
 							return 0;
@@ -42,13 +42,14 @@ var getSortedModules = function(root, exclude, callback) {
 
 						var modulePath = root + '/' + module;
 						var packagePath = path.normalize(modulePath + '/package.json');
-						console.log(packagePath);
 						fs.exists(packagePath, function(pkgExists) {
 							if(pkgExists) {
+								logger.info('Find module: ' + module);
+								logger.info('Module path: ' + modulePath);
 								var priority = require(modulePath + '/package').priority;
 								var initPath = modulePath + '/lib/init.js';
 
-								console.log('module: ', module, ', priority: ', priority);
+								logger.info('Module priority: ' + priority);
 
 								fs.exists(initPath, function(initExists) {
 									if(initExists) {
@@ -90,20 +91,21 @@ var getSortedModules = function(root, exclude, callback) {
 };
 
 var initModules = function (modules, callback) {
-	console.log('Modules: ', modules);
-	for (var i = 0, len = modules.length; i < len; i += 1) {
-		var module = modules[i];
+	logger.debug('Modules: ', modules);
+	_.each(modules, function(module) {
 		var moduleInit = require(module.init);
 		if (typeof moduleInit === 'function') {
 			moduleInit();
 		}
-	}
+	});
 	callback();
 };
 
 module.exports.initModules = function(callback) {
 	var root = config.modPath;
-	getSortedModules(root, function(err, modules) {
+	var excludeModules = ['oct-config'];
+
+	getSortedModules(root, excludeModules, function(err, modules) {
 		if(err) {
 			callback(err);
 		} else {

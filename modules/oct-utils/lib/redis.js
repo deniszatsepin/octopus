@@ -4,19 +4,20 @@
 * denis@zatsepin.spb.ru
 */
 
-var redis = require('redis');
-var config = require('oct-config');
+const redis = require('redis');
+const config = require('oct-config');
+const logger = config.logger;
 
 
 exports.init = function () {
 	var port = config.get('redis.port');
 	var host = config.get('redis.host');
-	console.log('redis cfg: ', host, ':', port);
+	logger.debug('Redis config: ' + host + ':', port);
 
 	var client = redis.createClient(port, host);
 	
 	client.on('error', function (err) {
-		console.log('Error: ' + err);
+		logger.error('Redis error: ' + err);
   });
 	
 	module.exports.client = client;

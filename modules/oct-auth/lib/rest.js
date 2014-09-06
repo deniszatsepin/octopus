@@ -1,47 +1,46 @@
-var passport = require("passport");
+const passport  = require('koa-passport');
+const config    = require('oct-config');
+const logger    = config.logger;
+const util      = require('util');
 
-var createSession = function(req, res, next) {
-	var authenticate = passport.authenticate('local', function(err, user, info) {
-		console.log('Err: ', err);
-		console.log('User: ', user);
-		console.log('Info: ', info);
-		console.log('Req: ', req);
-		if (err) {
-			next(err);
-		}
+var createSession = function *createSession(next) {
+	var ctx = this;
+	yield* passport.authenticate('local', function*(err, user, info) {
+		logger.debug(util.format('Create session [User: %s, info: %s]'), user, info);
+
+		var res = this.res;
+		var req = this.req;
+		if (err) throw err;
+
 		if (!user) {
-			console.log('Not user!');
-			res.json(400, {
+			logger.debug('Not user!');
+			ctx.status = 401;
+			ctx.body = {
 				result: 'error',
 				error: {
 					nr: 1,
 					description: 'authentication failure'
 				}
-			});
+			};
 		} else {
-			req.logIn(user, function(err) {
-				if (err) {
-					next(err);
-				}
-				res.json({
-					result: 'ok',
-					user_id: user._id
-				});
-			});
+			yield ctx.login(user);
+			ctx.body = {
+				result: 'ok',
+				user_id: user._id
+			};
 		}
 
-	});
-	authenticate(req, res, next);
+	}).call(this, next);
 };
 
-var destroySession = function (req, res, next) {
-	console.log('destroy session');
-	var sessId = req.body.id;
-	
-	res.json(200, {
+var destroySession = function *destroySession(next) {
+	logger.debug('Destroy session');
+	var sessId = this.body.id;
+	this.status = 200;
+	this.body = {
 		error: 0,
 		message: 'session destroyed'
-	});
+	};
 };
 
 module.exports.handlers = {

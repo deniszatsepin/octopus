@@ -1,10 +1,12 @@
-var _ = require('lodash');
-var path = require('path');
+const _       = require('lodash');
+const log4js  = require('log4js');
+const path    = require('path');
 
 var Configurator = function(config) {
-  this.config =     config;
-  this.root =       path.normalize(__dirname + '/../..');
-  this.modPath =    path.normalize(this.root + '/modules');
+  this.config   = config;
+  this.root     = config.root;
+  this.modPath  = path.normalize(this.root + '/modules');
+	this.logger   = log4js.getLogger();
 };
 
 Configurator.prototype.get = function(path) {
@@ -17,7 +19,7 @@ Configurator.prototype.get = function(path) {
       result = null;
       var desc = 'Configurator: wrong path (' + path + ')';
       var err = new Error(desc);
-      console.log(err);
+	    this.logger.error(desc);
       throw err;
     }
   }

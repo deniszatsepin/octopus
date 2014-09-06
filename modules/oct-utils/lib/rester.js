@@ -4,8 +4,7 @@
  * Date: 05.09.13
  */
 
-var server = require('./server').server;
-var express = require('express');
+const Router = require('koa-router');
 
 /**
  * This function gets handlers and base path and assosiate handlers with routes.
@@ -14,7 +13,7 @@ var express = require('express');
  */
 module.exports = function(handlers) {
 	var path = '/';
-	var router = express.Router();
+	var router = new Router();
   for (var actionName in handlers) {
     var handler = handlers[actionName]
       , route = '';

@@ -11,7 +11,7 @@
   "mongo": {
     "host": "localhost",
     "port": "",
-    "db": "octopus",
+    "db": "octopus-dev",
     "fixtures": "/fixtures/mongo"
   },
   "redis": {
@@ -20,5 +20,9 @@
   },
   "photo": {
     "path": "/home/fetch/work/octos/files"
-  }
+  },
+	"static": {
+		"path": "/public",
+		"favicon": "/public/favicon"
+	}
 }

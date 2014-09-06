@@ -4,12 +4,15 @@
  * Date: 05.09.13
  */
 
-var passport = require('passport')
-	, server = require('oct-utils/lib/server').server
-	, rester = require('oct-utils/lib/rester')
-	, rest = require('./rest');
+const passport  = require('koa-passport');
+const mount     = require('koa-mount');
+const server    = require('oct-utils/lib/server').server;
+const rester    = require('oct-utils/lib/rester');
+const rest      = require('./rest');
+const config    = require('oct-config');
+const logger    = config.logger;
 
-console.log("oct-auth initialization...");
+logger.info("oct-auth initialization...");
 
 module.exports = function() {
 	//Initializing passport
@@ -26,7 +29,7 @@ module.exports = function() {
 	loadStrategies();
 
 	var router = rester(rest.handlers);
-	server.use('/session', router);
+	server.use(mount('/session', router.middleware()));
 };
 
 var loadStrategies = function () {

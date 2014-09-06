@@ -1,34 +1,30 @@
-var express = require('express');
-var favicon = require('static-favicon');
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
-var Cookies = require('cookies');
-var session = require('express-session');
-var serveStatic = require('serve-static');
-var errorHandler = require('errorhandler');
-var config = require('oct-config');
-var redis = require('./redis');
-var RedisStore = require('connect-redis')(session);
+const koa         = require('koa');
+const favicon     = require('koa-favi');
+const bodyParser  = require('koa-bodyparser');
+const session     = require('koa-sess');
+const serveStatic = require('koa-static');
+const onerror     = require('koa-onerror');
+const config      = require('oct-config');
+const redis       = require('./redis');
+const redisStorage  = require('koa-redis');
 var app = null;
 
 module.exports.setup = function() {
-  app = express();
+  app = koa();
+	onerror(app);
 
-  var sessionOptions = {
-    secret: config.get('server.secret'),
-    key: config.get('server.session.key'),
-    cookie: {
-      maxAge: config.get('server.session.maxAge') * 3600000,
-      secure: config.get('server.session.secure')
-    },
-    store: new RedisStore({client: redis.client})
-  };
-  
-	app.use(favicon(config.root + '/public/favicon.ico'));
-	app.use(bodyParser({ uploadDir: config.root + '/uploads' }));
-	app.use(methodOverride());
-	app.use(Cookies.express(config.get('server.session.key')));
-	app.use(session(sessionOptions));
+	app.keys = [config.get('server.session.key')];
+	app.use(session({
+		secret: config.get('server.secret'),
+		cookie: {
+			maxAge: config.get('server.session.maxAge') * 3600000,
+			secure: config.get('server.session.secure')
+		},
+		store: redisStorage({client: redis.client})
+	}));
+
+	app.use(favicon(config.root + config.get('static.favicon')));
+	app.use(bodyParser());
 
   module.exports.server = app;
   return app;
@@ -36,11 +32,8 @@ module.exports.setup = function() {
 
 module.exports.postInstall = function () {
   app.use(serveStatic(config.root + '/public'));
-  
-  app.use( function(req, res, next) {
-    res.send(404, "Sorry, but page with url " + req.url + " doesn't exist.");
-  });
 
+	/*
 	var env = process.env.NODE_ENV || 'development';
   if ('development' === env) {
     app.use(errorHandler({
@@ -48,4 +41,5 @@ module.exports.postInstall = function () {
       dumpExceptions: true
     }));
   }
+  */
 };

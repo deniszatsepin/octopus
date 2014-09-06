@@ -17,7 +17,9 @@ module.exports.systemInit = function() {
     Server.postInstall();
 
 
-    http.createServer(server).listen(port, function() {
+    var srv = http.Server(server.callback());
+	  var io = require('socket.io')(srv);
+	  srv.listen(port, function() {
       console.log('Octopus listening on port ' + port);
     });
   });
