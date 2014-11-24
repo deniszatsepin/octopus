@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "testall",
-    "start": "NODE_ENV=development NODE_PATH=./modules ./node_modules/.bin/nodemon index.js"
+    "start": "NODE_ENV=development NODE_PATH=./modules nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -18,22 +18,24 @@
   },
   "license": "BSD",
   "dependencies": {
-    "express": "latest",
-    "passport": "latest",
-    "passport-local": "latest",
-    "lodash": "latest",
     "async": "~0.2.9",
-    "redis": "~0.8.4",
+    "body-parser": "^1.0.2",
     "connect-redis": ">=2.0.0",
-    "mongoose": "~3.6.19",
-    "pow-mongoose-fixtures": "~0.3.0",
+    "cookie-parser": "^1.0.1",
     "elasticsearchclient": "~0.5.3",
     "errorhandler": "^1.0.0",
-    "method-override": "^1.0.0",
-    "cookie-parser": "^1.0.1",
+    "express": "latest",
     "express-session": "^1.0.2",
+    "lodash": "^2.4.1",
+    "method-override": "^1.0.0",
+    "mongoose": "~3.6.19",
+    "passport": "latest",
+    "passport-local": "latest",
+    "pow-mongoose-fixtures": "~0.3.0",
+    "redis": "~0.8.4",
     "serve-static": "^1.0.4",
-    "body-parser": "^1.0.2",
+    "socket-ntp": "^0.1.0",
+    "socket.io": "^1.2.1",
     "static-favicon": "^1.0.2"
   },
   "devDependencies": {
