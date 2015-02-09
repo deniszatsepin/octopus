@@ -3,6 +3,7 @@ var mongoose  = require('mongoose')
 
 var ProfileSchema = new Schema({
   _id: Number,
+	userId: Number,
   firstName: {
     type: String,
     "default": ''
@@ -17,7 +18,7 @@ var ProfileSchema = new Schema({
   description: {
     type: String,
     "default": ''
-  },
+  }
 });
 
 mongoose.model('Profile', ProfileSchema);

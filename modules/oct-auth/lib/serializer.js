@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
 var User = mongoose.model('User');
 /**
  * Gets User object and returns User.id
@@ -20,13 +19,13 @@ exports.serialize = function(user, done) {
 exports.deserialize = function(id, done) {
   //TODO: Find User in database by id and return him with done callback
 	User.findOne({
-		id: id
+		_id: id
 	}).exec(function(err, user) {
 		if (err) {
 			return done(err);
 		}
 
-		if (user.id === id) {
+		if (user && user.id === id) {
 			return done(null, user);
 		}
 		done(null, null);

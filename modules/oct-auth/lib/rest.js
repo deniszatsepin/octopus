@@ -6,7 +6,8 @@ const util      = require('util');
 var createSession = function *createSession(next) {
 	var ctx = this;
 	yield* passport.authenticate('local', function*(err, user, info) {
-		logger.debug(util.format('Create session [User: %s, info: %s]'), user, info);
+		var message = info ? info.message : '';
+		logger.debug(util.format('Create session [User: %s, info: %s]'), user, message);
 
 		var res = this.res;
 		var req = this.req;

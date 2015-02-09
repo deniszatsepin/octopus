@@ -3,9 +3,9 @@
     "port": 3000,
     "secret": "DJLVIA09",
     "session": {
-    	"key": "oct_sid",
-    	"maxAge": 24,
-    	"secure": false
+      "key": "oct_sid",
+      "maxAge": 24,
+      "secure": false
     }
   },
   "mongo": {
@@ -15,14 +15,14 @@
     "fixtures": "/fixtures/mongo"
   },
   "redis": {
-  	"host": "localhost",
-  	"port":	6379
+    "host": "localhost",
+    "port":	6379
   },
   "photo": {
     "path": "/home/fetch/work/octos/files"
   },
-	"static": {
-		"path": "/public",
-		"favicon": "/public/favicon"
-	}
+  "static": {
+    "path": "/public",
+    "favicon": "/public/favicon"
+  }
 }

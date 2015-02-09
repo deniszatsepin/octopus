@@ -8,6 +8,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "denis@zatsepin.spb.ru",
-  "license": "BSD-2-Clause",
-  "priority": 4
+  "license": "MIT",
+  "priority": 2
 }

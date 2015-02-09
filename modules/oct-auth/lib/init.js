@@ -15,20 +15,15 @@ const logger    = config.logger;
 logger.info("oct-auth initialization...");
 
 module.exports = function() {
+	require('./model');
+	loadStrategies();
+	var serializer = require('./serializer');
+	passport.serializeUser(serializer.serialize);
+	passport.deserializeUser(serializer.deserialize);
 	//Initializing passport
+	var router = rester(rest.handlers);
 	server.use(passport.initialize());
 	server.use(passport.session());
-
-	require('./model');
-	var serializer = require('./serializer');
-
-	passport.serializeUser(serializer.serialize);
-
-	passport.deserializeUser(serializer.deserialize);
-
-	loadStrategies();
-
-	var router = rester(rest.handlers);
 	server.use(mount('/session', router.middleware()));
 };
 

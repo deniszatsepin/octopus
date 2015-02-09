@@ -1,6 +1,7 @@
 exports.Profile = [
 	{
 		_id: 1,
+		userId: 1,
 		firstName: 'Denis',
 		lastName: 'Zatsepin',
 		age: 31,

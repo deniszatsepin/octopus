@@ -21,7 +21,7 @@ exports.init = function () {
 	//Load fixtures
 	db.once('open', function() {
 		var fixPath = path.join(config.root, config.get('mongo.fixtures'));
-		//fixtures.load(fixPath, mongoose);
+		fixtures.load(fixPath, mongoose);
 	});
 
 	exports.mongoose = mongoose;
