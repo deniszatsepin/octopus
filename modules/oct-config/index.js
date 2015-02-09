@@ -1,12 +1,10 @@
 const _       = require('lodash');
-const log4js  = require('log4js');
 const path    = require('path');
 
 var Configurator = function(config) {
   this.config   = config;
   this.root     = config.root;
   this.modPath  = path.normalize(this.root + '/modules');
-	this.logger   = log4js.getLogger();
 };
 
 Configurator.prototype.get = function(path) {

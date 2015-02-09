@@ -4,8 +4,8 @@
  */
 
 const mongoose = require('mongoose');
-const config = require('oct-config');
-const logger = config.logger;
+const core = require('oct-core');
+const logger = core.logger;
 const Profile = mongoose.model('Profile');
 //const thunkify = require('thunkify');
 

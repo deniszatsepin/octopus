@@ -9,6 +9,6 @@ logger.info('Octopus initialization.');
 config.root = __dirname;
 Configurator.init(config);
 
-var utils = require('oct-utils');
+var core = require('oct-core');
 
-utils.systemInit();
+core.systemInit();

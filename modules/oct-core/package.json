@@ -1,12 +1,11 @@
 {
-  "name": "oct-mainpage",
+  "name": "oct-core",
   "version": "0.0.1",
-  "description": "Mainpage for Octopus project.",
+  "description": "A core functionality for Octopus project.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "denis@zatsepin.spb.ru",
-  "license": "BSD-2-Clause",
-  "priority": 5
+  "license": "MIT"
 }

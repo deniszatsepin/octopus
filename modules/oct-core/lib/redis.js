@@ -6,7 +6,7 @@
 
 const redis = require('redis');
 const config = require('oct-config');
-const logger = config.logger;
+const logger = require('log4js').getLogger();
 
 
 exports.init = function () {

@@ -6,11 +6,11 @@
 
 const passport  = require('koa-passport');
 const mount     = require('koa-mount');
-const server    = require('oct-utils/lib/server').server;
-const rester    = require('oct-utils/lib/rester');
+const server    = require('oct-core').server;
+const rester    = require('oct-core').rester;
 const rest      = require('./rest');
 const config    = require('oct-config');
-const logger    = config.logger;
+const logger    = require('log4js').getLogger();
 
 logger.info("oct-auth initialization...");
 

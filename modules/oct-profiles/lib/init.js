@@ -1,11 +1,11 @@
 const mount       = require('koa-mount');
-const server      = require('oct-utils/lib/server').server;
-const rester      = require('oct-utils/lib/rester');
-const config      = require('oct-config');
+const core 				= require('oct-core');
+const server      = core.server;
+const rester      = core.rester;
+const logger      = core.logger;
 
 require('./model');
 const middleware  = require('./middleware');
-const logger      = config.logger;
 
 logger.info('oct-profiles initialization...');
 
