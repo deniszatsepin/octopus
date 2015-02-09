@@ -7,7 +7,7 @@
   "scripts": {
     "test": "testall",
     "start1": "NODE_ENV=development NODE_PATH=./modules ./node_modules/.bin/nodemon index.js",
-    "start": "NODE_ENV=development NODE_PATH=./modules node --harmony --debug-brk index.js"
+    "start": "NODE_ENV=development NODE_PATH=./modules node --harmony index.js"
   },
   "repository": {
     "type": "git",
@@ -32,7 +32,7 @@
     "koa-passport": "latest",
     "koa-redis": "latest",
     "koa-router": "latest",
-    "koa-sess": "latest",
+    "koa-generic-session": "latest",
     "koa-static": "latest",
     "koa-views": "latest",
     "lodash": "latest",

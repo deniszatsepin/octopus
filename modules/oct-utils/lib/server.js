@@ -1,15 +1,13 @@
 const koa         = require('koa');
 const favicon     = require('koa-favi');
 const bodyParser  = require('koa-bodyparser');
-const jade        = require('koa-jade');
-const session     = require('koa-sess');
+const session     = require('koa-generic-session');
 const serveStatic = require('koa-static');
 const onerror     = require('koa-onerror');
 const config      = require('oct-config');
 const redis       = require('./redis');
 const redisStorage  = require('koa-redis');
 const Router      = require('koa-router');
-const jadeConfig  = require('')
 var app = null;
 
 module.exports.setup = function() {
