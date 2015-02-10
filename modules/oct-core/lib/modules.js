@@ -59,7 +59,7 @@ var initModules = function (modules) {
 
 module.exports.initModulesSync = function() {
 	var root = config.modPath;
-	var excludeModules = ['Readme', 'oct-config', 'oct-core'];
+	var excludeModules = config.get("module.exclude") || [];
 
 	var modules = getSortedModules(root, excludeModules);
 	initModules(modules);

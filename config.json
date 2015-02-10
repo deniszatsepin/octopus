@@ -24,5 +24,8 @@
   "static": {
     "path": "/public",
     "favicon": "/public/favicon"
+  },
+  "modules": {
+    "exclude": ["Readme", "oct-config", "oct-core"]
   }
 }
