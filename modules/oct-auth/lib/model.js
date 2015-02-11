@@ -1,9 +1,9 @@
 /**
 * User model
 */
-var mongoose  = require('mongoose')
-  , Schema    = mongoose.Schema
-  , crypto    = require('crypto');
+const crypto    = require('crypto');
+const mongoose  = require('mongoose');
+const Schema    = mongoose.Schema;
 
 var UserSchema = new Schema({
   _id: Number,

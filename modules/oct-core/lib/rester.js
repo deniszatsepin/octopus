@@ -4,7 +4,8 @@
  * Date: 05.09.13
  */
 
-const Router = require('koa-router');
+const Router  = require('koa-router');
+const Body    = require('koa-body');
 
 /**
  * This function gets handlers and base path and assosiate handlers with routes.
@@ -27,7 +28,7 @@ module.exports = function(handlers) {
         router.get(route, handler);
         break;
       case 'create':
-        router.post(path, handler);
+        router.post(path, Body(), handler);
         break;
       case 'show':
         route = path + ':id';
@@ -39,14 +40,14 @@ module.exports = function(handlers) {
         break;
       case 'update':
         route = path + ':id';
-        router.put(route, handler);
+        router.put(route, Body(), handler);
         break;
       case 'destroy':
         route = path + ':id';
         router.delete(route, handler);
         break;
       default:
-        router.get(route, handler);
+        router.get(route, Body(), handler);
     }
   }
 	return router;

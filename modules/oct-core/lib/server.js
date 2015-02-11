@@ -1,17 +1,15 @@
-const koa         = require('koa');
-const bodyParser  = require('koa-bodyparser');
-const onerror     = require('koa-onerror');
-const config      = require('oct-config');
-const redis       = require('./redis');
-const redisStorage  = require('koa-redis');
-const Router      = require('koa-router');
+const koa           = require('koa');
+const onerror       = require('koa-onerror');
+const config        = require('oct-config');
+const Router        = require('koa-router');
+const Validate      = require('koa-validate');
 var app = null;
 
 module.exports.setup = function() {
   app = koa();
 	onerror(app);
 
-	app.use(bodyParser());
+	app.use(Validate());
 	app.use(Router(app));
 
   return app;

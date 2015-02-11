@@ -1,9 +1,18 @@
 const passport  = require('koa-passport');
-const config    = require('oct-config');
-const logger    = config.logger;
 const util      = require('util');
+const logger    = require('oct-core').logger;
 
 var createSession = function *createSession(next) {
+
+	this.checkBody('email').notEmpty('Email field is required').isEmail('You enter a bad email.');
+	this.checkBody('password').notEmpty().len(3,20);
+
+	if (this.errors) {
+		this.body = this.errors;
+		this.response.status = 401;
+		return;
+	}
+
 	var ctx = this;
 	yield* passport.authenticate('local', function*(err, user, info) {
 		var message = info ? info.message : '';

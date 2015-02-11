@@ -4,9 +4,9 @@
 * denis@zatsepin.spb.ru
 */
 
-const redis = require('redis');
-const config = require('oct-config');
-const logger = require('log4js').getLogger();
+const redis   = require('redis');
+const config  = require('oct-config');
+const logger  = require('log4js').getLogger();
 
 
 exports.init = function () {

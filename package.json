@@ -7,7 +7,7 @@
   "scripts": {
     "test": "testall",
     "start1": "NODE_ENV=development NODE_PATH=./modules ./node_modules/.bin/nodemon index.js",
-    "start": "NODE_ENV=development NODE_PATH=./modules node --harmony index.js"
+    "start": "NODE_ENV=development NODE_PATH=./modules node --harmony --debug index.js"
   },
   "repository": {
     "type": "git",
@@ -24,7 +24,7 @@
     "elasticsearchclient": "latest",
     "errorhandler": "latest",
     "koa": "latest",
-    "koa-bodyparser": "latest",
+    "koa-body": "latest",
     "koa-favi": "latest",
     "koa-generic-session": "latest",
     "koa-jade": "latest",
@@ -35,6 +35,7 @@
     "koa-redis": "latest",
     "koa-router": "latest",
     "koa-static": "latest",
+    "koa-validate": "^0.2.7",
     "koa-views": "latest",
     "lodash": "latest",
     "log4js": "latest",

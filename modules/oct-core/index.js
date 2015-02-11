@@ -1,7 +1,7 @@
+const mongo   = require('./lib/mongo');
+const redis   = require('./lib/redis');
 const Server  = require('./lib/server');
 const http    = require('http');
-const redis   = require('./lib/redis');
-const mongo   = require('./lib/mongo');
 const config  = require('oct-config');
 const modules = require('./lib/modules');
 const log4js  = require('log4js');
@@ -15,9 +15,9 @@ module.exports.systemInit = function() {
   var server = Server.setup();
   var port = config.get('server.port');
 
-  module.exports.server = server;
-  module.exports.logger = logger;
-  module.exports.rester = require('./lib/rester');
+  exports.server = server;
+  exports.logger = logger;
+  exports.rester = require('./lib/rester');
 
   //initialize all modules
   modules.initModulesSync();
