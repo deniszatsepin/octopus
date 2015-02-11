@@ -8,7 +8,9 @@ var createSession = function *createSession(next) {
 	this.checkBody('password').notEmpty().len(3,20);
 
 	if (this.errors) {
-		this.body = this.errors;
+		this.body = {
+			errors: this.errors
+		};
 		this.response.status = 401;
 		return;
 	}
@@ -26,17 +28,14 @@ var createSession = function *createSession(next) {
 			logger.debug('Not user!');
 			ctx.status = 401;
 			ctx.body = {
-				result: 'error',
-				error: {
-					nr: 1,
-					description: 'authentication failure'
-				}
+				errors: [
+					auth: 'email or password are incorrect'
+				]
 			};
 		} else {
 			yield ctx.login(user);
 			ctx.body = {
-				result: 'ok',
-				user_id: user._id
+				data: user
 			};
 		}
 
