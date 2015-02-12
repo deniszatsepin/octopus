@@ -1,0 +1,12 @@
+{
+  "name": "oct-user",
+  "version": "0.0.1",
+  "description": "User manipulation for Octopus project.",
+  "main": "lib/init.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "denis@zatsepin.spb.ru",
+  "license": "MIT",
+  "priority": 1
+}
