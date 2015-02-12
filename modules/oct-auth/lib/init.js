@@ -16,7 +16,6 @@ const rest      = require('./rest');
 logger.info("oct-auth initialization...");
 
 module.exports = function() {
-	require('./model');
 	loadStrategies();
 	var serializer = require('./serializer');
 	passport.serializeUser(serializer.serialize);
