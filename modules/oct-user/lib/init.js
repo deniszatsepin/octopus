@@ -10,12 +10,11 @@ const core      = require('oct-core');
 const server    = core.server;
 const rester    = core.rester;
 const logger    = core.logger;
-const rest      = require('./rest');
 require('./model');
 
-logger.info("oct-user initialization...");
-
 module.exports = function() {
-	var router = rester(rest.handlers);
+	logger.info("oct-user initialization...");
+	var rest      = require('./rest');
+	var router 		= rester(rest.handlers);
 	server.use(mount('/user', router.middleware()));
 };

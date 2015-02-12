@@ -4,9 +4,11 @@
 const crypto    = require('crypto');
 const mongoose  = require('mongoose');
 const Schema    = mongoose.Schema;
+const Promise   = require('bluebird');
+
+
 
 var UserSchema = new Schema({
-  _id: Number,
   email: {
     type: String,
     required: true
@@ -88,4 +90,6 @@ UserSchema.methods = {
   }
 };
 
-mongoose.model('User', UserSchema);
+var User = mongoose.model('User', UserSchema);
+Promise.promisifyAll(User);
+Promise.promisifyAll(User.prototype);

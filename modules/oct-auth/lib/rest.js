@@ -28,9 +28,9 @@ var createSession = function *createSession(next) {
 			logger.debug('Not user!');
 			ctx.status = 401;
 			ctx.body = {
-				errors: [
+				errors: {
 					auth: 'email or password are incorrect'
-				]
+				}
 			};
 		} else {
 			yield ctx.login(user);

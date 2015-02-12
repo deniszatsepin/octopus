@@ -1,5 +1,9 @@
+const _ 				= require('lodash');
 const util      = require('util');
 const logger    = require('oct-core').logger;
+const mongoose  = require('mongoose');
+
+var User = mongoose.model('User');
 
 var createUser = function *createUser(next) {
 
@@ -11,7 +15,36 @@ var createUser = function *createUser(next) {
 		this.response.status = 401;
 		return;
 	}
-	this.body = ok;
+
+	var user = new User({
+		email: this.request.body.email,
+		password: this.request.body.password
+	});
+
+	try {
+		user = yield user.saveAsync();
+	} catch(e) {
+		if (e.name === 'ValidationError') {
+			this.body = {
+				errors: _.reduce(e.errors, function(res, val, key) {
+					if (val && val.message) {
+						res[key] = val.message;
+					}
+					return res;
+				}, {})
+			}
+			return;
+		} else {
+			throw e;
+		}
+	}
+
+	this.body = {
+		data: {
+			_id: user[0]._id,
+			email: user[0].email
+		}
+	};
 };
 
 var destroyUser = function *destroyUser(next) {
