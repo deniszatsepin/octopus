@@ -16,5 +16,5 @@ module.exports = function() {
 	logger.info("oct-user initialization...");
 	var rest      = require('./rest');
 	var router 		= rester(rest.handlers);
-	server.use(mount('/user', router.middleware()));
+	server.use(mount('/users', router.middleware()));
 };

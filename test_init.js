@@ -6,4 +6,5 @@ Configurator.init(config);
 
 var core = require('oct-core');
 
-core.systemInit();
+core.systemInit(true);
+

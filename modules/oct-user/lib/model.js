@@ -1,6 +1,6 @@
 /**
-* User model
-*/
+ * User model
+ */
 const crypto    = require('crypto');
 const mongoose  = require('mongoose');
 const Schema    = mongoose.Schema;
@@ -26,47 +26,48 @@ var UserSchema = new Schema({
     "default": ''
   },
   profile: {
-		type: Schema.Types.ObjectId,
-		ref: 'Profile'
+    type: Schema.Types.ObjectId,
+    ref: 'Profile'
   }
 });
 
 UserSchema.virtual('password')
-  .set(
-    function(password) {
-      this._password = password;
-      this.salt = this.makeSalt();
-      this.hashed_password = this.encryptPassword(password);
-    }
-  )
-  .get(
-    function() {
-     return this._password;
-    }
-  );
+.set(
+  function(password) {
+    this._password = password;
+    this.salt = this.makeSalt();
+    this.hashed_password = this.encryptPassword(password);
+  }
+)
+.get(
+  function() {
+    return this._password;
+  }
+);
 
 UserSchema.path('email').validate(
   function(email, fn) {
-    var User;
-    User = mongoose.model('User');
-    if (this.isNew || this.isModified('email')) {
-      User.find({
-        email: email
-      }).exec(function(err, users) {
-        fn(err || users.length === 0);
-      });
-    } else {
-      fn(true);
-    }
-  }, 
-  'Email already exists'
+  var User;
+  User = mongoose.model('User');
+  debugger;
+  if (this.isNew || this.isModified('email')) {
+    User.find({
+      email: email
+    }).exec(function(err, users) {
+      fn(err || users.length === 0);
+    });
+  } else {
+    fn(true);
+  }
+}, 
+'Email already exists'
 );
 
 UserSchema.path('hashed_password').validate(
   function(hashed_password) {
-    return hashed_password.length;
-  }, 
-  'Password cannot be blank'
+  return hashed_password.length;
+}, 
+'Password cannot be blank'
 );
 
 UserSchema.methods = {

@@ -5,24 +5,24 @@ var fixtures  = require('pow-mongoose-fixtures');
 
 
 exports.init = function () {
-	var host    = config.get('mongo.host');
-	var port    = config.get('mongo.port');
-	var dbName  = config.get('mongo.db');
-	
-	var url = 'mongodb://' + host + '/' + dbName;
+  var host    = config.get('mongo.host');
+  var port    = config.get('mongo.port');
+  var dbName  = config.get('mongo.db');
 
-	mongoose.connect(url);
-	var db = mongoose.connection;
+  var url = 'mongodb://' + host + '/' + dbName;
 
-	db.on('error', function() {
-		console.log('Mongoose connection error');
-	});
+  mongoose.connect(url);
+  var db = mongoose.connection;
 
-	//Load fixtures
-	db.once('open', function() {
-		var fixPath = path.join(config.root, config.get('mongo.fixtures'));
-		fixtures.load(fixPath, mongoose);
-	});
+  db.on('error', function() {
+    console.log('Mongoose connection error');
+  });
 
-	exports.mongoose = mongoose;
+  //Load fixtures
+  db.once('open', function() {
+    var fixPath = path.join(config.root, config.get('mongo.fixtures'));
+    fixtures.load(fixPath, mongoose);
+  });
+
+  exports.mongoose = mongoose;
 };

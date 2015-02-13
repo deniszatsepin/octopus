@@ -6,7 +6,7 @@ const config  = require('oct-config');
 const modules = require('./lib/modules');
 const log4js  = require('log4js');
 
-module.exports.systemInit = function() {
+module.exports.systemInit = function(initOnly) {
   redis.init();
   mongo.init();
 
@@ -24,12 +24,11 @@ module.exports.systemInit = function() {
 
   Server.postInstall();
 
-
-  var srv = http.Server(server.callback());
-  var io = require('socket.io')(srv);
-  srv.listen(port, function() {
-    logger.info('Octopus listening on port ' + port);
-  });
-  
-
+  if (!initOnly) {
+    var srv = http.Server(server.callback());
+    var io = require('socket.io')(srv);
+    srv.listen(port, function() {
+      logger.info('Octopus listening on port ' + port);
+    });
+  }
 };
